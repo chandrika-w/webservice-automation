@@ -128,7 +128,15 @@ public class WebServiceTest {
 
     @Test
     public void listOfEmployees(){
-
+        Response response=given()
+                .header("Authorization",token)
+                .queryParams("size",20)
+                .when()
+                .log()
+                .all()
+                .get("/api/employees");
+        Assertions.assertEquals(200,response.getStatusCode());
+        response.getBody().prettyPrint();
     }
 
     private int getRandomInt(){
